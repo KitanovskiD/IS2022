@@ -4,14 +4,16 @@ using EShop.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EShop.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220413153816_UpdateRelations")]
+    partial class UpdateRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,9 +169,6 @@ namespace EShop.Repository.Migrations
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -355,13 +354,13 @@ namespace EShop.Repository.Migrations
 
             modelBuilder.Entity("EShop.Domain.Relations.ProductInOrder", b =>
                 {
-                    b.HasOne("EShop.Domain.DomainModels.Order", "Order")
+                    b.HasOne("EShop.Domain.DomainModels.Product", "Product")
                         .WithMany("ProductInOrders")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EShop.Domain.DomainModels.Product", "Product")
+                    b.HasOne("EShop.Domain.DomainModels.Order", "Order")
                         .WithMany("ProductInOrders")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -370,13 +369,13 @@ namespace EShop.Repository.Migrations
 
             modelBuilder.Entity("EShop.Domain.Relations.ProductInShoppingCart", b =>
                 {
-                    b.HasOne("EShop.Domain.DomainModels.Product", "CurrnetProduct")
+                    b.HasOne("EShop.Domain.DomainModels.ShoppingCart", "UserCart")
                         .WithMany("ProductInShoppingCarts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EShop.Domain.DomainModels.ShoppingCart", "UserCart")
+                    b.HasOne("EShop.Domain.DomainModels.Product", "CurrnetProduct")
                         .WithMany("ProductInShoppingCarts")
                         .HasForeignKey("ShoppingCartId")
                         .OnDelete(DeleteBehavior.Cascade)

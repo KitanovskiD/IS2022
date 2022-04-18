@@ -31,17 +31,18 @@ namespace EShop.Repository
                 .ValueGeneratedOnAdd();
 
             builder.Entity<ProductInShoppingCart>()
-                .HasKey(z => new { z.ProductId, z.ShoppingCartId });
+                .Property(z => z.Id)
+                .ValueGeneratedOnAdd();
 
             builder.Entity<ProductInShoppingCart>()
                 .HasOne(z => z.CurrnetProduct)
                 .WithMany(z => z.ProductInShoppingCarts)
-                .HasForeignKey(z => z.ShoppingCartId);
+                .HasForeignKey(z => z.ProductId);
 
             builder.Entity<ProductInShoppingCart>()
                 .HasOne(z => z.UserCart)
                 .WithMany(z => z.ProductInShoppingCarts)
-                .HasForeignKey(z => z.ProductId);
+                .HasForeignKey(z => z.ShoppingCartId);
 
             builder.Entity<ShoppingCart>()
                 .HasOne<EShopApplicationUser>(z => z.Owner)
@@ -49,17 +50,18 @@ namespace EShop.Repository
                 .HasForeignKey<ShoppingCart>(z => z.OwnerId);
 
             builder.Entity<ProductInOrder>()
-              .HasKey(z => new { z.ProductId, z.OrderId });
+                .Property(z => z.Id)
+                .ValueGeneratedOnAdd();
 
             builder.Entity<ProductInOrder>()
                 .HasOne(z => z.Product)
                 .WithMany(z => z.ProductInOrders)
-                .HasForeignKey(z => z.OrderId);
+                .HasForeignKey(z => z.ProductId);
 
             builder.Entity<ProductInOrder>()
                 .HasOne(z => z.Order)
                 .WithMany(z => z.ProductInOrders)
-                .HasForeignKey(z => z.ProductId);
+                .HasForeignKey(z => z.OrderId);
         }
     }
 }

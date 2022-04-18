@@ -33,6 +33,7 @@ namespace EShop.Service.Implementation
             if (item.SelectedProductId != null && userShoppingCard != null)
             {
                 var product = this.GetDetailsForProduct(item.SelectedProductId);
+                //{896c1325-a1bb-4595-92d8-08da077402fc}
 
                 if (product != null)
                 {
@@ -46,7 +47,18 @@ namespace EShop.Service.Implementation
                         Quantity = item.Quantity
                     };
 
-                    this._productInShoppingCartRepository.Insert(itemToAdd);
+                    var existing = userShoppingCard.ProductInShoppingCarts.Where(z => z.ShoppingCartId == userShoppingCard.Id && z.ProductId == itemToAdd.ProductId).FirstOrDefault();
+
+                    if(existing != null)
+                    {
+                        existing.Quantity += itemToAdd.Quantity;
+                        this._productInShoppingCartRepository.Update(existing);
+
+                    }
+                    else
+                    {
+                        this._productInShoppingCartRepository.Insert(itemToAdd);
+                    }
                     return true;
                 }
                 return false;

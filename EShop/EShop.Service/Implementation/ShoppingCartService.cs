@@ -103,7 +103,8 @@ namespace EShop.Service.Implementation
                     ProductId = z.CurrnetProduct.Id,
                     Product = z.CurrnetProduct,
                     OrderId = order.Id,
-                    Order = order
+                    Order = order, 
+                    Quantity = z.Quantity
                 }).ToList();
 
                 productInOrders.AddRange(result);
