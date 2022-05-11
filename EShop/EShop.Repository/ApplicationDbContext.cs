@@ -17,6 +17,7 @@ namespace EShop.Repository
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCards { get; set; }
         public virtual DbSet<ProductInShoppingCart> ProductInShoppingCarts { get; set; }
+        public virtual DbSet<EmailMessage> EmailMessages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
