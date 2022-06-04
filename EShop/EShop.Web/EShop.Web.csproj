@@ -34,6 +34,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="NLog" Version="4.7.14" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0" />
+    <PackageReference Include="Stripe.net" Version="39.110.0" />
   </ItemGroup>
 
   <ItemGroup>
